@@ -4,6 +4,7 @@ class TodoModel {
   final String tglmulai;
   final String tglselesai;
   final String kategetori;
+  final bool isCheck;
 
   TodoModel({
     required String this.title,
@@ -11,5 +12,6 @@ class TodoModel {
     required String this.tglmulai,
     required String this.tglselesai,
     required String this.kategetori,
+    required bool this.isCheck,
   });
 }

@@ -10,6 +10,7 @@ class CardTodo extends StatefulWidget {
   final String category;
   final String selectedCategory;
   final Color color;
+  final bool isCheck;
 
   const CardTodo({
     Key? key,
@@ -20,6 +21,7 @@ class CardTodo extends StatefulWidget {
     required this.category,
     required this.selectedCategory,
     required this.color,
+    required this.isCheck,
   }) : super(key: key);
 
   @override
@@ -37,72 +39,72 @@ class _CardTodoState extends State<CardTodo> {
       color: Colors.white,
       child: Column(
         children: [
-          widget.selectedCategory == 'null' ||
-                  widget.category == widget.selectedCategory
-              ? ExpansionPanelList(
-                  expansionCallback: (int index, bool isExpanded) {
-                    setState(() {
-                      this.isExpanded = !isExpanded;
-                    });
-                  },
-                  children: [
-                    ExpansionPanel(
-                      headerBuilder: (BuildContext context, bool isExpanded) {
-                        return Padding(
-                          padding: const EdgeInsets.all(10),
-                          child: Row(
+          // widget.selectedCategory == 'null' ||
+          //         widget.category == widget.selectedCategory
+          //     ?
+          ExpansionPanelList(
+            expansionCallback: (int index, bool isExpanded) {
+              setState(() {
+                this.isExpanded = !isExpanded;
+              });
+            },
+            children: [
+              ExpansionPanel(
+                headerBuilder: (BuildContext context, bool isExpanded) {
+                  return Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: Row(
+                      children: [
+                        Container(
+                          child: Checkbox(
+                            fillColor: MaterialStatePropertyAll(widget.color),
+                            checkColor: Colors.white,
+                            // value: widget.isCheck,
+                            value: isCheckedTodo,
+                            onChanged: (bool? value) {
+                              setState(() {
+                                isCheckedTodo = value!;
+                              });
+                            },
+                          ),
+                        ),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Container(
-                                child: Checkbox(
-                                  fillColor:
-                                      MaterialStatePropertyAll(widget.color),
-                                  checkColor: Colors.white,
-                                  value: isCheckedTodo,
-                                  onChanged: (bool? value) {
-                                    setState(() {
-                                      isCheckedTodo = value!;
-                                    });
-                                  },
+                              Text(
+                                '${widget.title}',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 17,
                                 ),
                               ),
-                              Expanded(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      '${widget.title}',
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 17,
-                                      ),
-                                    ),
-                                    Text(
-                                        '${widget.dateStart} - ${widget.dateEnd}'),
-                                  ],
-                                ),
-                              ),
+                              Text('${widget.dateStart} - ${widget.dateEnd}'),
                             ],
                           ),
-                        );
-                      },
-                      body: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Container(
-                            width: 250,
-                            child: Text(
-                              widget.keterangan,
-                              style: TextStyle(fontSize: 16),
-                            ),
-                          ),
-                          SizedBox(height: 10),
-                        ],
-                      ),
-                      isExpanded: this.isExpanded,
+                        ),
+                      ],
                     ),
+                  );
+                },
+                body: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      width: 250,
+                      child: Text(
+                        widget.keterangan,
+                        style: TextStyle(fontSize: 16),
+                      ),
+                    ),
+                    SizedBox(height: 10),
                   ],
-                )
-              : Container()
+                ),
+                isExpanded: this.isExpanded,
+              ),
+            ],
+          )
+          // : Container()
         ],
       ),
     );
