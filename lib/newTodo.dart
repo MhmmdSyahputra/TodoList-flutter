@@ -20,7 +20,7 @@ class _NewTodosState extends State<NewTodos> {
 
   @override
   Widget build(BuildContext context) {
-    final List<String> listCategory = <String>['Routine', 'Work', 'Others'];
+    final List<String> listCategory = <String>['Routine', 'Work', 'Other'];
     return Scaffold(
         appBar: AppBar(
           title: Text("Todos"),

@@ -41,7 +41,11 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   String? selectedCategory;
   bool isCheckedTodo = false;
-  List<String> categoryOptions = ['Routine', 'Work', 'Others'];
+  List<Map<String, dynamic>> categoryOptions = [
+    {'category': 'Routine', 'chipColor': Colors.orange},
+    {'category': 'Work', 'chipColor': Colors.blue},
+    {'category': 'Other', 'chipColor': Colors.green},
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -69,35 +73,26 @@ class _MyHomePageState extends State<MyHomePage> {
                         children: [
                           Wrap(
                             spacing: 10.0,
-                            children:
-                                categoryOptions.asMap().entries.map((entry) {
-                              final int index = entry.key;
-                              final String category = entry.value;
-                              Color chipColor = Colors.green;
-
-                              if (index == 0) {
-                                chipColor = Colors.orange;
-                              } else if (index == 1) {
-                                chipColor = Colors.blue;
-                              }
-
+                            children: categoryOptions.map((option) {
                               return ChoiceChip(
                                 padding: EdgeInsets.symmetric(
                                     vertical: 10, horizontal: 10),
                                 label: Text(
-                                  category,
+                                  option['category'],
                                   style: TextStyle(
-                                    color: selectedCategory == category
-                                        ? Colors.white
-                                        : Colors.black,
+                                    color:
+                                        selectedCategory == option['category']
+                                            ? Colors.white
+                                            : Colors.black,
                                   ),
                                 ),
-                                selected: selectedCategory == category,
-                                selectedColor: chipColor,
+                                selected:
+                                    selectedCategory == option['category'],
+                                selectedColor: option['chipColor'],
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(30),
                                   side: BorderSide(
-                                    color: chipColor,
+                                    color: option['chipColor'],
                                     width: 2,
                                   ),
                                 ),
@@ -105,7 +100,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                 onSelected: (selected) {
                                   setState(() {
                                     selectedCategory =
-                                        selected ? category : null;
+                                        selected ? option['category'] : null;
                                   });
                                 },
                               );
@@ -115,6 +110,9 @@ class _MyHomePageState extends State<MyHomePage> {
                 Column(
                     children: TodoProvider.todoList.isNotEmpty
                         ? TodoProvider.todoList.map((allList) {
+                            final Map<String, dynamic> categoryOption =
+                                categoryOptions.firstWhere((option) =>
+                                    option['category'] == allList.kategetori);
                             return Padding(
                                 padding:
                                     const EdgeInsets.symmetric(vertical: 5),
@@ -125,11 +123,10 @@ class _MyHomePageState extends State<MyHomePage> {
                                     dateEnd: allList.tglselesai,
                                     category: allList.kategetori,
                                     selectedCategory:
-                                        selectedCategory.toString()));
+                                        selectedCategory.toString(),
+                                    color: categoryOption['chipColor']));
                           }).toList()
-                        : [Text("data masih kosong!")]
-                    // ],
-                    )
+                        : [Text("data masih kosong!")])
               ],
             ),
           ),
