@@ -109,23 +109,46 @@ class _MyHomePageState extends State<MyHomePage> {
                         ])),
                 Column(
                     children: TodoProvider.todoList.isNotEmpty
-                        ? TodoProvider.todoList.map((allList) {
-                            final Map<String, dynamic> categoryOption =
-                                categoryOptions.firstWhere((option) =>
-                                    option['category'] == allList.kategetori);
-                            return Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(vertical: 5),
-                                child: CardTodo(
-                                    title: allList.title,
-                                    keterangan: allList.keterangan,
-                                    dateStart: allList.tglmulai,
-                                    dateEnd: allList.tglselesai,
-                                    category: allList.kategetori,
-                                    selectedCategory:
-                                        selectedCategory.toString(),
-                                    color: categoryOption['chipColor']));
-                          }).toList()
+                        ? selectedCategory == null
+                            ? TodoProvider.todoList.map((allList) {
+                                final Map<String, dynamic> categoryOption =
+                                    categoryOptions.firstWhere((option) =>
+                                        option['category'] ==
+                                        allList.kategetori);
+                                return Padding(
+                                    padding:
+                                        const EdgeInsets.symmetric(vertical: 5),
+                                    child: CardTodo(
+                                        title: allList.title,
+                                        keterangan: allList.keterangan,
+                                        dateStart: allList.tglmulai,
+                                        dateEnd: allList.tglselesai,
+                                        category: allList.kategetori,
+                                        selectedCategory:
+                                            selectedCategory.toString(),
+                                        color: categoryOption['chipColor']));
+                              }).toList()
+                            : TodoProvider.todoList
+                                .where((allList) =>
+                                    allList.kategetori == selectedCategory)
+                                .map((allList) {
+                                final Map<String, dynamic> categoryOption =
+                                    categoryOptions.firstWhere((option) =>
+                                        option['category'] ==
+                                        allList.kategetori);
+                                return Padding(
+                                    padding:
+                                        const EdgeInsets.symmetric(vertical: 5),
+                                    child: CardTodo(
+                                        title: allList.title,
+                                        keterangan: allList.keterangan,
+                                        dateStart: allList.tglmulai,
+                                        dateEnd: allList.tglselesai,
+                                        category: allList.kategetori,
+                                        selectedCategory:
+                                            selectedCategory.toString(),
+                                        color: categoryOption['chipColor']));
+                              }).toList()
                         : [Text("data masih kosong!")])
               ],
             ),
