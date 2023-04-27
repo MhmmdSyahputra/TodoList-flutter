@@ -37,7 +37,8 @@ class _CardTodoState extends State<CardTodo> {
       color: Colors.white,
       child: Column(
         children: [
-          widget.category == widget.selectedCategory
+          widget.selectedCategory == 'null' ||
+                  widget.category == widget.selectedCategory
               ? ExpansionPanelList(
                   expansionCallback: (int index, bool isExpanded) {
                     setState(() {
