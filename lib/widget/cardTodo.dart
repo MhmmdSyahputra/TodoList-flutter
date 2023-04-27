@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 
 class CardTodo extends StatefulWidget {
@@ -33,66 +35,69 @@ class _CardTodoState extends State<CardTodo> {
       color: Colors.white,
       child: Column(
         children: [
-          ExpansionPanelList(
-            expansionCallback: (int index, bool isExpanded) {
-              setState(() {
-                this.isExpanded = !isExpanded;
-              });
-            },
-            children: [
-              ExpansionPanel(
-                headerBuilder: (BuildContext context, bool isExpanded) {
-                  return Padding(
-                    padding: const EdgeInsets.all(10),
-                    child: Row(
-                      children: [
-                        Container(
-                          child: Checkbox(
-                            checkColor: Colors.white,
-                            value: isCheckedTodo,
-                            onChanged: (bool? value) {
-                              setState(() {
-                                isCheckedTodo = value!;
-                              });
-                            },
-                          ),
-                        ),
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
+          widget.category == widget.selectedCategory
+              ? ExpansionPanelList(
+                  expansionCallback: (int index, bool isExpanded) {
+                    setState(() {
+                      this.isExpanded = !isExpanded;
+                    });
+                  },
+                  children: [
+                    ExpansionPanel(
+                      headerBuilder: (BuildContext context, bool isExpanded) {
+                        return Padding(
+                          padding: const EdgeInsets.all(10),
+                          child: Row(
                             children: [
-                              Text(
-                                '${widget.title}',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 17,
+                              Container(
+                                child: Checkbox(
+                                  checkColor: Colors.white,
+                                  value: isCheckedTodo,
+                                  onChanged: (bool? value) {
+                                    setState(() {
+                                      isCheckedTodo = value!;
+                                    });
+                                  },
                                 ),
                               ),
-                              Text('${widget.dateStart} - ${widget.dateEnd}'),
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      '${widget.title}',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 17,
+                                      ),
+                                    ),
+                                    Text(
+                                        '${widget.dateStart} - ${widget.dateEnd}'),
+                                  ],
+                                ),
+                              ),
                             ],
                           ),
-                        ),
-                      ],
-                    ),
-                  );
-                },
-                body: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Container(
-                      width: 250,
-                      child: Text(
-                        widget.keterangan,
-                        style: TextStyle(fontSize: 16),
+                        );
+                      },
+                      body: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            width: 250,
+                            child: Text(
+                              widget.keterangan,
+                              style: TextStyle(fontSize: 16),
+                            ),
+                          ),
+                          SizedBox(height: 10),
+                        ],
                       ),
+                      isExpanded: this.isExpanded,
                     ),
-                    SizedBox(height: 10),
                   ],
-                ),
-                isExpanded: this.isExpanded,
-              ),
-            ],
-          ),
+                )
+              : SizedBox()
         ],
       ),
     );
