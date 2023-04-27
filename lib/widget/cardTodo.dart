@@ -10,6 +10,7 @@ class CardTodo extends StatefulWidget {
   final String category;
   final String selectedCategory;
   final Color color;
+  final bool isCheck;
 
   const CardTodo({
     Key? key,
@@ -20,6 +21,7 @@ class CardTodo extends StatefulWidget {
     required this.category,
     required this.selectedCategory,
     required this.color,
+    required this.isCheck,
   }) : super(key: key);
 
   @override
@@ -57,6 +59,7 @@ class _CardTodoState extends State<CardTodo> {
                           child: Checkbox(
                             fillColor: MaterialStatePropertyAll(widget.color),
                             checkColor: Colors.white,
+                            // value: widget.isCheck,
                             value: isCheckedTodo,
                             onChanged: (bool? value) {
                               setState(() {
