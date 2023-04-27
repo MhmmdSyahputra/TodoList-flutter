@@ -216,8 +216,6 @@ class _NewTodosScreenState extends State<NewTodosScreen> {
 
                               _titleInputController.text = '';
                               _ketInputController.text = '';
-                              dateStartInput = '';
-                              dateEndInput = '';
                               // Navigator.of(context).push(MaterialPageRoute(
                               //     builder: (context) => MyApp()));
                             },
