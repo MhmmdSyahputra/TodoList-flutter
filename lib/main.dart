@@ -123,7 +123,9 @@ class _MyHomePageState extends State<MyHomePage> {
                                     keterangan: allList.keterangan,
                                     dateStart: allList.tglmulai,
                                     dateEnd: allList.tglselesai,
-                                    category: allList.kategetori));
+                                    category: allList.kategetori,
+                                    selectedCategory:
+                                        selectedCategory.toString()));
                           }).toList()
                         : [Text("data masih kosong!")]
                     // ],

@@ -11,7 +11,7 @@ class NewTodos extends StatefulWidget {
 }
 
 class _NewTodosState extends State<NewTodos> {
-  final TextEditingController _titleController = TextEditingController();
+  final TextEditingController _titleInputController = TextEditingController();
   final TextEditingController _ketInputController = TextEditingController();
   final TextEditingController _dateStartInputController =
       TextEditingController();
@@ -43,7 +43,7 @@ class _NewTodosState extends State<NewTodos> {
                 )),
                 Expanded(
                     child: TextField(
-                  controller: _titleController,
+                  controller: _titleInputController,
                   decoration: InputDecoration(
                       hintText: 'Judul Kegiatan',
                       contentPadding: const EdgeInsets.all(15),
@@ -189,7 +189,7 @@ class _NewTodosState extends State<NewTodos> {
                         onPressed: () {
                           Provider.of<TodoProvider>(context, listen: false)
                               .AddTodo(TodoModel(
-                                  title: _ketInputController.text,
+                                  title: _titleInputController.text,
                                   keterangan: _ketInputController.text,
                                   tglmulai: _dateStartInputController.text,
                                   tglselesai: _dateEndInputController.text,

@@ -6,6 +6,7 @@ class CardTodo extends StatefulWidget {
   final String dateStart;
   final String dateEnd;
   final String category;
+  final String selectedCategory;
 
   const CardTodo({
     Key? key,
@@ -14,6 +15,7 @@ class CardTodo extends StatefulWidget {
     required this.dateStart,
     required this.dateEnd,
     required this.category,
+    required this.selectedCategory,
   }) : super(key: key);
 
   @override
@@ -60,7 +62,7 @@ class _CardTodoState extends State<CardTodo> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                widget.title,
+                                '${widget.title}',
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 17,
