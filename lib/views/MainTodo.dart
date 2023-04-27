@@ -96,6 +96,7 @@ class _TodoListScreenState extends State<TodoListScreen> {
                                         padding: const EdgeInsets.symmetric(
                                             vertical: 5),
                                         child: CardTodo(
+                                          id: allList.id,
                                           title: allList.title,
                                           keterangan: allList.keterangan,
                                           dateStart: allList.tglmulai,
@@ -119,6 +120,7 @@ class _TodoListScreenState extends State<TodoListScreen> {
                                         padding: const EdgeInsets.symmetric(
                                             vertical: 5),
                                         child: CardTodo(
+                                          id: allList.id,
                                           title: allList.title,
                                           keterangan: allList.keterangan,
                                           dateStart: allList.tglmulai,

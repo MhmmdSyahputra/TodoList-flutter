@@ -1,8 +1,11 @@
 import 'dart:ffi';
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:todo_sort/provider/providersTodos.dart';
 
 class CardTodo extends StatefulWidget {
+  final String id;
   final String title;
   final String keterangan;
   final String dateStart;
@@ -14,6 +17,7 @@ class CardTodo extends StatefulWidget {
 
   const CardTodo({
     Key? key,
+    required this.id,
     required this.title,
     required this.keterangan,
     required this.dateStart,
@@ -59,12 +63,14 @@ class _CardTodoState extends State<CardTodo> {
                           child: Checkbox(
                             fillColor: MaterialStatePropertyAll(widget.color),
                             checkColor: Colors.white,
-                            // value: widget.isCheck,
-                            value: isCheckedTodo,
+                            value: widget.isCheck,
                             onChanged: (bool? value) {
-                              setState(() {
-                                isCheckedTodo = value!;
-                              });
+                              if (value == true) {
+                                TodoProvider todoProvider =
+                                    context.read<TodoProvider>();
+                                todoProvider.updateTodoStatus(
+                                    widget.id, value!);
+                              }
                             },
                           ),
                         ),

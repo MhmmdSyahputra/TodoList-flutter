@@ -4,6 +4,7 @@ import 'package:todo_sort/main.dart';
 import 'package:todo_sort/model/modelTodo.dart';
 import 'package:todo_sort/provider/providersTodos.dart';
 import 'package:date_time_picker/date_time_picker.dart';
+import 'package:uuid/uuid.dart';
 
 class NewTodosScreen extends StatefulWidget {
   const NewTodosScreen({super.key});
@@ -18,6 +19,7 @@ class _NewTodosScreenState extends State<NewTodosScreen> {
   String? dateStartInput;
   String? dateEndInput;
   String categoryValue = 'Routine';
+  var uuid = Uuid();
 
   @override
   Widget build(BuildContext context) {
@@ -204,6 +206,7 @@ class _NewTodosScreenState extends State<NewTodosScreen> {
                             onPressed: () {
                               Provider.of<TodoProvider>(context, listen: false)
                                   .AddTodo(TodoModel(
+                                      id: uuid.v1(),
                                       title: _titleInputController.text,
                                       keterangan: _ketInputController.text,
                                       tglmulai: dateStartInput.toString(),

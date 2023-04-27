@@ -10,4 +10,12 @@ class TodoProvider with ChangeNotifier {
     _todoList.add(todo);
     notifyListeners();
   }
+
+  void updateTodoStatus(String id, bool isChecked) {
+    final int todoIndex = _todoList.indexWhere((todo) => todo.id == id);
+    if (todoIndex != -1) {
+      _todoList[todoIndex].isCheck = isChecked;
+      notifyListeners();
+    }
+  }
 }
