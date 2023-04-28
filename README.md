@@ -1,16 +1,17 @@
-# todo_sort
+# Todo List In Flutter
 
-A new Flutter project.
+Todo list
 
-## Getting Started
+## Feature
+- add todo
+- display todo
+- check todo
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
+### View Todo
+<img src="https://cdn.discordapp.com/attachments/1087264660954304634/1101566277690081391/image.png"  width="200">
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+### Add todo
+<img src="https://cdn.discordapp.com/attachments/1087264660954304634/1101566355007868939/image.png"  width="200">
+  
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
