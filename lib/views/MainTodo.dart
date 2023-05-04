@@ -96,16 +96,8 @@ class _TodoListScreenState extends State<TodoListScreen> {
                                         padding: const EdgeInsets.symmetric(
                                             vertical: 5),
                                         child: CardTodo(
-                                          id: allList.id,
-                                          title: allList.title,
-                                          keterangan: allList.keterangan,
-                                          dateStart: allList.tglmulai,
-                                          dateEnd: allList.tglselesai,
-                                          category: allList.kategetori,
-                                          selectedCategory:
-                                              selectedCategory.toString(),
+                                          data: allList,
                                           color: categoryOption['chipColor'],
-                                          isCheck: allList.isCheck,
                                         ));
                                   }).toList()
                                 : TodoProvider.todoList
@@ -120,16 +112,8 @@ class _TodoListScreenState extends State<TodoListScreen> {
                                         padding: const EdgeInsets.symmetric(
                                             vertical: 5),
                                         child: CardTodo(
-                                          id: allList.id,
-                                          title: allList.title,
-                                          keterangan: allList.keterangan,
-                                          dateStart: allList.tglmulai,
-                                          dateEnd: allList.tglselesai,
-                                          category: allList.kategetori,
-                                          selectedCategory:
-                                              selectedCategory.toString(),
+                                          data: allList,
                                           color: categoryOption['chipColor'],
-                                          isCheck: allList.isCheck,
                                         ));
                                   }).toList()
                             : [Text("data masih kosong!")])
