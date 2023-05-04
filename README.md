@@ -9,9 +9,12 @@ Todo list
 
 
 ### View Todo
-<img src="https://cdn.discordapp.com/attachments/1087264660954304634/1101566277690081391/image.png"  width="200">
+<img src="https://media.discordapp.net/attachments/1087264660954304634/1103739636938985533/Screenshot_2023-05-05_004442.png?width=656&height=1106"  width="400">
+
+### View Sort Todo
+<img src="https://media.discordapp.net/attachments/1087264660954304634/1103739636062375946/Screenshot_2023-05-05_004458.png?width=620&height=1108"  width="400">
 
 ### Add todo
-<img src="https://cdn.discordapp.com/attachments/1087264660954304634/1101566355007868939/image.png"  width="200">
+<img src="https://media.discordapp.net/attachments/1087264660954304634/1103739636645380197/Screenshot_2023-05-05_004315.png?width=726&height=1106"  width="400">
   
 
