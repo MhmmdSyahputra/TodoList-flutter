@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todo_sort/provider/providerTheme.dart';
 import 'package:todo_sort/provider/providersTodos.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_sort/views/MainTodo.dart';
@@ -14,10 +15,15 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // final prov = Provider.of<ThemeProvider>(context);
+
     return MultiProvider(
         providers: [
           ChangeNotifierProvider(
             create: (context) => TodoProvider(),
+          ),
+          ChangeNotifierProvider(
+            create: (context) => ThemeProvider(),
           ),
         ],
         child: MaterialApp(
