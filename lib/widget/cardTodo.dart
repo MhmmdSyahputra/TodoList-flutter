@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_sort/provider/providersTodos.dart';
 
+import '../GlobalFunction.dart';
+import '../provider/providerTheme.dart';
+
 class CardTodo extends StatefulWidget {
   final data;
   final Color color;
@@ -22,14 +25,12 @@ class _CardTodoState extends State<CardTodo> {
 
   @override
   Widget build(BuildContext context) {
+    final provThemeMode = Provider.of<ThemeProvider>(context).enableDarkMode;
+
     return Container(
       padding: EdgeInsets.all(0),
-      color: Colors.white,
       child: Column(
         children: [
-          // widget.data.selectedCategory == 'null' ||
-          //         widget.data.category == widget.data.selectedCategory
-          //     ?
           ExpansionPanelList(
             expansionCallback: (int index, bool isExpanded) {
               setState(() {
@@ -38,6 +39,7 @@ class _CardTodoState extends State<CardTodo> {
             },
             children: [
               ExpansionPanel(
+                backgroundColor: MyTheme(provThemeMode),
                 headerBuilder: (BuildContext context, bool isExpanded) {
                   return Padding(
                     padding: const EdgeInsets.all(10),
@@ -66,11 +68,16 @@ class _CardTodoState extends State<CardTodo> {
                                 '${widget.data.title}',
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
+                                  color: MyTheme(!provThemeMode),
                                   fontSize: 17,
                                 ),
                               ),
                               Text(
-                                  '${widget.data.tglmulai.toString()} - ${widget.data.tglselesai.toString()}'),
+                                '${widget.data.tglmulai.toString()} - ${widget.data.tglselesai.toString()}',
+                                style: TextStyle(
+                                  color: MyTheme(!provThemeMode),
+                                ),
+                              ),
                             ],
                           ),
                         ),
@@ -85,7 +92,8 @@ class _CardTodoState extends State<CardTodo> {
                       width: 250,
                       child: Text(
                         widget.data.keterangan,
-                        style: TextStyle(fontSize: 16),
+                        style: TextStyle(
+                            fontSize: 16, color: MyTheme(!provThemeMode)),
                       ),
                     ),
                     SizedBox(height: 10),
