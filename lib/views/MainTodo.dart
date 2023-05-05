@@ -26,23 +26,6 @@ class _TodoListScreenState extends State<TodoListScreen> {
   Widget build(BuildContext context) {
     final prov = Provider.of<ThemeProvider>(context);
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Todos'),
-        centerTitle: true,
-        backgroundColor: MyThemeHead(prov.enableDarkMode),
-        actions: [
-          prov.enableDarkMode ? Icon(Icons.dark_mode) : Icon(Icons.light_mode),
-          Switch(
-            value: prov.enableDarkMode,
-            activeColor: Colors.cyan,
-            onChanged: (bool value) {
-              setState(() {
-                prov.SetBrightness(value);
-              });
-            },
-          )
-        ],
-      ),
       body: Consumer<TodoProvider>(builder: (
         context,
         TodoProvider,

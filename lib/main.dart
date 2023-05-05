@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:todo_sort/provider/providerTheme.dart';
 import 'package:todo_sort/provider/providersTodos.dart';
 import 'package:provider/provider.dart';
+import 'package:todo_sort/views/MainMenuBottom.dart';
 import 'package:todo_sort/views/MainTodo.dart';
 import 'package:todo_sort/views/newTodo.dart';
 import 'package:todo_sort/widget/cardTodo.dart';
@@ -32,6 +33,6 @@ class MyApp extends StatelessWidget {
             theme: ThemeData(
               primaryColor: Color(0xFF4E37A9),
             ),
-            home: const TodoListScreen()));
+            home: const BottomNavMain()));
   }
 }
