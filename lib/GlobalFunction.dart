@@ -4,7 +4,7 @@ Color MyTheme(bool valTheme) {
   if (valTheme) {
     return Color(0xff2b2d42);
   } else {
-    return Color(0xccffffff);
+    return Color(0xFFffffff);
   }
 }
 
@@ -20,6 +20,6 @@ Color MyThemeBottom(bool valTheme) {
   if (valTheme) {
     return Color(0xff2b2d42);
   } else {
-    return Color(0xccFFFFFF);
+    return Color(0xFFFFFFFF);
   }
 }
