@@ -86,11 +86,17 @@ class _TodoListScreenState extends State<TodoListScreen> {
                       SizedBox(
                         height: 20,
                       ),
-                      Text(
-                        'Unfinished',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: myTheme(!provThemeMode)),
+                      Row(
+                        children: [
+                          Text(
+                            'Unfinished',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: myTheme(!provThemeMode)),
+                          ),
+                          Text(
+                              ' | ${selectedCategory != null ? selectedCategory : 'All'}')
+                        ],
                       ),
                       Divider(color: myTheme(!provThemeMode)),
                       Column(
@@ -130,11 +136,17 @@ class _TodoListScreenState extends State<TodoListScreen> {
                       SizedBox(
                         height: 20,
                       ),
-                      Text(
-                        'Finished',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: myTheme(!provThemeMode)),
+                      Row(
+                        children: [
+                          Text(
+                            'Finished',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: myTheme(!provThemeMode)),
+                          ),
+                          Text(
+                              ' | ${selectedCategory != null ? selectedCategory : 'All'}')
+                        ],
                       ),
                       Divider(color: myTheme(!provThemeMode)),
                       Column(

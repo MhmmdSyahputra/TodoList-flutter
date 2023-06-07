@@ -153,7 +153,7 @@ class _NewTodosScreenState extends State<NewTodosScreen> {
                     SizedBox(width: 20),
                     Expanded(
                         child: DateTimePicker(
-                      initialValue: '',
+                      initialValue: DateTime.now().toString(),
                       dateHintText: '20-04-2023',
                       firstDate: DateTime(2000),
                       lastDate: DateTime(2100),
@@ -171,7 +171,7 @@ class _NewTodosScreenState extends State<NewTodosScreen> {
                     SizedBox(width: 70),
                     Expanded(
                         child: DateTimePicker(
-                      initialValue: '',
+                      initialValue: DateTime.now().toString(),
                       dateHintText: '20-04-2023',
                       firstDate: DateTime(2000),
                       lastDate: DateTime(2100),

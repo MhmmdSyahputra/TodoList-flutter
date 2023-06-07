@@ -27,7 +27,6 @@ class _CardTodoState extends State<CardTodo> {
     final provThemeMode = Provider.of<ThemeProvider>(context).enableDarkMode;
 
     return Container(
-      padding: EdgeInsets.all(0),
       child: Column(
         children: [
           ExpansionPanelList(
@@ -38,6 +37,7 @@ class _CardTodoState extends State<CardTodo> {
             },
             children: [
               ExpansionPanel(
+                canTapOnHeader: true,
                 backgroundColor: myTheme(provThemeMode),
                 headerBuilder: (BuildContext context, bool isExpanded) {
                   return Padding(
