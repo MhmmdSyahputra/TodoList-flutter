@@ -95,7 +95,11 @@ class _TodoListScreenState extends State<TodoListScreen> {
                                 color: myTheme(!provThemeMode)),
                           ),
                           Text(
-                              ' | ${selectedCategory != null ? selectedCategory : 'All'}')
+                            ' | ${selectedCategory != null ? selectedCategory : 'All'}',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: myTheme(!provThemeMode)),
+                          )
                         ],
                       ),
                       Divider(color: myTheme(!provThemeMode)),
@@ -145,7 +149,11 @@ class _TodoListScreenState extends State<TodoListScreen> {
                                 color: myTheme(!provThemeMode)),
                           ),
                           Text(
-                              ' | ${selectedCategory != null ? selectedCategory : 'All'}')
+                            ' | ${selectedCategory != null ? selectedCategory : 'All'}',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: myTheme(!provThemeMode)),
+                          )
                         ],
                       ),
                       Divider(color: myTheme(!provThemeMode)),
