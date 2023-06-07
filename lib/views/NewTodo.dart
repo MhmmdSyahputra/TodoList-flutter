@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_sort/GlobalFunction.dart';
-import 'package:todo_sort/main.dart';
 import 'package:todo_sort/model/modelTodo.dart';
 import 'package:todo_sort/provider/providerTheme.dart';
 import 'package:todo_sort/provider/providersTodos.dart';
 import 'package:date_time_picker/date_time_picker.dart';
+import 'package:todo_sort/utils/data.dart';
 import 'package:todo_sort/views/MainTodo.dart';
-import 'package:todo_sort/widget/Dialog.dart';
 import 'package:uuid/uuid.dart';
 
 class NewTodosScreen extends StatefulWidget {
@@ -27,13 +26,12 @@ class _NewTodosScreenState extends State<NewTodosScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final List<String> listCategory = <String>['Routine', 'Work', 'Other'];
     final provThemeMode = Provider.of<ThemeProvider>(context).enableDarkMode;
 
     return Scaffold(
-        backgroundColor: MyTheme(provThemeMode),
+        backgroundColor: myTheme(provThemeMode),
         appBar: AppBar(
-          backgroundColor: MyThemeHead(provThemeMode),
+          backgroundColor: myThemeHead(provThemeMode),
           title: Text('Todos'),
         ),
         body: ListView(
@@ -47,12 +45,12 @@ class _NewTodosScreenState extends State<NewTodosScreen> {
                     Expanded(
                         child: Row(
                       children: [
-                        Icon(Icons.list_alt, color: MyTheme(!provThemeMode)),
+                        Icon(Icons.list_alt, color: myTheme(!provThemeMode)),
                         Text(
                           'Kegiatan',
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
-                              color: MyTheme(!provThemeMode)),
+                              color: myTheme(!provThemeMode)),
                         )
                       ],
                     )),
@@ -61,11 +59,11 @@ class _NewTodosScreenState extends State<NewTodosScreen> {
                       controller: _titleInputController,
                       decoration: InputDecoration(
                           hintText: 'Judul Kegiatan',
-                          hintStyle: TextStyle(color: MyTheme(!provThemeMode)),
+                          hintStyle: TextStyle(color: myTheme(!provThemeMode)),
                           contentPadding: const EdgeInsets.all(15),
                           enabledBorder: OutlineInputBorder(
                             borderSide: BorderSide(
-                                color: MyTheme(!provThemeMode), width: 1.0),
+                                color: myTheme(!provThemeMode), width: 1.0),
                           ),
                           border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10))),
@@ -80,13 +78,13 @@ class _NewTodosScreenState extends State<NewTodosScreen> {
                       children: [
                         Icon(
                           Icons.format_align_left_sharp,
-                          color: MyTheme(!provThemeMode),
+                          color: myTheme(!provThemeMode),
                         ),
                         Text(
                           'Keterangan',
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
-                              color: MyTheme(!provThemeMode)),
+                              color: myTheme(!provThemeMode)),
                         )
                       ],
                     )),
@@ -101,12 +99,12 @@ class _NewTodosScreenState extends State<NewTodosScreen> {
                       controller: _ketInputController,
                       decoration: InputDecoration(
                           hintText: 'Tambah Keterangan',
-                          hintStyle: TextStyle(color: MyTheme(!provThemeMode)),
+                          hintStyle: TextStyle(color: myTheme(!provThemeMode)),
                           contentPadding: const EdgeInsets.only(
                               left: 20, top: 50, right: 20, bottom: 50),
                           enabledBorder: OutlineInputBorder(
                               borderSide:
-                                  BorderSide(color: MyTheme(!provThemeMode))),
+                                  BorderSide(color: myTheme(!provThemeMode))),
                           border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10))),
                     ))
@@ -121,13 +119,13 @@ class _NewTodosScreenState extends State<NewTodosScreen> {
                       children: [
                         Icon(
                           Icons.date_range,
-                          color: MyTheme(!provThemeMode),
+                          color: myTheme(!provThemeMode),
                         ),
                         Text(
                           'Tanggal Mulai',
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
-                              color: MyTheme(!provThemeMode)),
+                              color: myTheme(!provThemeMode)),
                         )
                       ],
                     )),
@@ -136,13 +134,13 @@ class _NewTodosScreenState extends State<NewTodosScreen> {
                       children: [
                         Icon(
                           Icons.date_range,
-                          color: MyTheme(!provThemeMode),
+                          color: myTheme(!provThemeMode),
                         ),
                         Text(
                           'Tanggal Selesai',
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
-                              color: MyTheme(!provThemeMode)),
+                              color: myTheme(!provThemeMode)),
                         )
                       ],
                     ))
@@ -166,7 +164,7 @@ class _NewTodosScreenState extends State<NewTodosScreen> {
                       },
                       onSaved: (val) => {dateStartInput = val},
                       style: TextStyle(
-                        color: MyTheme(
+                        color: myTheme(
                             !provThemeMode), // Atur warna teks menjadi putih
                       ),
                     )),
@@ -184,7 +182,7 @@ class _NewTodosScreenState extends State<NewTodosScreen> {
                       },
                       onSaved: (val) => {dateEndInput = val},
                       style: TextStyle(
-                        color: MyTheme(
+                        color: myTheme(
                             !provThemeMode), // Atur warna teks menjadi putih
                       ),
                     )),
@@ -200,22 +198,22 @@ class _NewTodosScreenState extends State<NewTodosScreen> {
                       children: [
                         Icon(
                           Icons.category,
-                          color: MyTheme(!provThemeMode),
+                          color: myTheme(!provThemeMode),
                         ),
                         Text(
                           'Kategori',
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
-                              color: MyTheme(!provThemeMode)),
+                              color: myTheme(!provThemeMode)),
                         )
                       ],
                     )),
                     Expanded(
                         child: DropdownButton<String>(
-                      dropdownColor: MyTheme(provThemeMode),
+                      dropdownColor: myTheme(provThemeMode),
                       value: categoryValue,
                       icon: const Icon(Icons.arrow_drop_down),
-                      style: TextStyle(color: MyTheme(!provThemeMode)),
+                      style: TextStyle(color: myTheme(!provThemeMode)),
                       underline: Container(
                         height: 1,
                         color: Colors.grey,
@@ -225,11 +223,10 @@ class _NewTodosScreenState extends State<NewTodosScreen> {
                           categoryValue = value!;
                         });
                       },
-                      items: listCategory
-                          .map<DropdownMenuItem<String>>((String value) {
+                      items: listCategoryOptions.map((value) {
                         return DropdownMenuItem<String>(
-                          value: value,
-                          child: Text(value),
+                          value: value['category'],
+                          child: Text(value['category']),
                         );
                       }).toList(),
                     )),
@@ -251,8 +248,14 @@ class _NewTodosScreenState extends State<NewTodosScreen> {
                               Provider.of<TodoProvider>(context, listen: false)
                                   .AddTodo(TodoModel(
                                       id: uuid.v1(),
-                                      title: _titleInputController.text,
-                                      keterangan: _ketInputController.text,
+                                      title:
+                                          _titleInputController.text.length == 0
+                                              ? 'Untitle'
+                                              : _titleInputController.text,
+                                      keterangan:
+                                          _ketInputController.text.length != 0
+                                              ? _ketInputController.text
+                                              : 'No Description',
                                       tglmulai: dateStartInput.toString(),
                                       tglselesai: dateEndInput.toString(),
                                       kategetori: categoryValue,
@@ -264,7 +267,7 @@ class _NewTodosScreenState extends State<NewTodosScreen> {
                                 context: context,
                                 builder: (BuildContext context) {
                                   return Dialog(
-                                    backgroundColor: MyTheme(provThemeMode),
+                                    backgroundColor: myTheme(provThemeMode),
                                     shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(5)),
                                     child: Stack(
@@ -284,7 +287,7 @@ class _NewTodosScreenState extends State<NewTodosScreen> {
                                                         fontSize: 16,
                                                         fontWeight:
                                                             FontWeight.bold,
-                                                        color: MyTheme(
+                                                        color: myTheme(
                                                             !provThemeMode)),
                                                     textAlign:
                                                         TextAlign.center),
@@ -293,7 +296,7 @@ class _NewTodosScreenState extends State<NewTodosScreen> {
                                                     'Kegiatan berhasil ditambahkan',
                                                     style: TextStyle(
                                                         fontSize: 16,
-                                                        color: MyTheme(
+                                                        color: myTheme(
                                                             !provThemeMode)),
                                                     textAlign:
                                                         TextAlign.center),
@@ -336,7 +339,7 @@ class _NewTodosScreenState extends State<NewTodosScreen> {
                             },
                             child: Text('Simpan'),
                             style: ElevatedButton.styleFrom(
-                              primary: MyThemeHead(provThemeMode),
+                              primary: myThemeHead(provThemeMode),
                             ))),
                   ]),
                 ),

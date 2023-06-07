@@ -3,9 +3,6 @@ import 'package:todo_sort/provider/providerTheme.dart';
 import 'package:todo_sort/provider/providersTodos.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_sort/views/MainMenuBottom.dart';
-import 'package:todo_sort/views/MainTodo.dart';
-import 'package:todo_sort/views/newTodo.dart';
-import 'package:todo_sort/widget/cardTodo.dart';
 
 void main() {
   runApp(const MyApp());

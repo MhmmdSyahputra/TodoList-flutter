@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_sort/provider/providersTodos.dart';
-
 import '../GlobalFunction.dart';
 import '../provider/providerTheme.dart';
 
@@ -39,7 +38,7 @@ class _CardTodoState extends State<CardTodo> {
             },
             children: [
               ExpansionPanel(
-                backgroundColor: MyTheme(provThemeMode),
+                backgroundColor: myTheme(provThemeMode),
                 headerBuilder: (BuildContext context, bool isExpanded) {
                   return Padding(
                     padding: const EdgeInsets.all(10),
@@ -68,14 +67,14 @@ class _CardTodoState extends State<CardTodo> {
                                 '${widget.data.title}',
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
-                                  color: MyTheme(!provThemeMode),
+                                  color: myTheme(!provThemeMode),
                                   fontSize: 17,
                                 ),
                               ),
                               Text(
                                 '${widget.data.tglmulai.toString()} - ${widget.data.tglselesai.toString()}',
                                 style: TextStyle(
-                                  color: MyTheme(!provThemeMode),
+                                  color: myTheme(!provThemeMode),
                                 ),
                               ),
                             ],
@@ -93,7 +92,7 @@ class _CardTodoState extends State<CardTodo> {
                       child: Text(
                         widget.data.keterangan,
                         style: TextStyle(
-                            fontSize: 16, color: MyTheme(!provThemeMode)),
+                            fontSize: 16, color: myTheme(!provThemeMode)),
                       ),
                     ),
                     SizedBox(height: 10),

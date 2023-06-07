@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_sort/provider/providerTheme.dart';
-
+import 'package:todo_sort/utils/data.dart';
 import '../GlobalFunction.dart';
 import '../provider/providersTodos.dart';
 import '../widget/cardTodo.dart';
@@ -17,11 +17,7 @@ class TodoListScreen extends StatefulWidget {
 class _TodoListScreenState extends State<TodoListScreen> {
   String? selectedCategory;
   bool isCheckedTodo = false;
-  List<Map<String, dynamic>> categoryOptions = [
-    {'category': 'Routine', 'chipColor': Colors.orange},
-    {'category': 'Work', 'chipColor': Colors.blue},
-    {'category': 'Other', 'chipColor': Colors.green},
-  ];
+
   @override
   Widget build(BuildContext context) {
     final prov = Provider.of<ThemeProvider>(context);
@@ -37,7 +33,7 @@ class _TodoListScreenState extends State<TodoListScreen> {
           children: [
             Container(
               height: MediaQuery.of(context).size.height,
-              color: MyTheme(prov.enableDarkMode),
+              color: myTheme(prov.enableDarkMode),
               child: Padding(
                 padding: EdgeInsets.all(10),
                 child: Center(
@@ -45,53 +41,48 @@ class _TodoListScreenState extends State<TodoListScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Container(
-                          height: 50,
-                          // color: Colors.orange,
-                          child: GridView.count(
-                              physics: NeverScrollableScrollPhysics(),
-                              shrinkWrap: true,
-                              crossAxisCount: 1,
-                              children: [
-                                Wrap(
-                                  spacing: 10.0,
-                                  children: categoryOptions.map((option) {
-                                    return ChoiceChip(
-                                      padding: EdgeInsets.symmetric(
-                                          vertical: 10, horizontal: 10),
-                                      label: Text(
-                                        option['category'],
-                                        style: TextStyle(
-                                          color: selectedCategory ==
-                                                  option['category']
-                                              ? prov.enableDarkMode
-                                                  ? Color(0xccffffff)
-                                                  : Color(0xcc14213d)
-                                              : option['chipColor'],
-                                        ),
-                                      ),
-                                      selected: selectedCategory ==
-                                          option['category'],
-                                      selectedColor: option['chipColor'],
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(30),
-                                        side: BorderSide(
-                                          color: option['chipColor'],
-                                          width: 2,
-                                        ),
-                                      ),
-                                      backgroundColor:
-                                          MyTheme(prov.enableDarkMode),
-                                      onSelected: (selected) {
-                                        setState(() {
-                                          selectedCategory = selected
-                                              ? option['category']
-                                              : null;
-                                        });
-                                      },
-                                    );
-                                  }).toList(),
-                                )
-                              ])),
+                        child: SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: Row(
+                              children: listCategoryOptions.map((option) {
+                            return Container(
+                              padding: EdgeInsets.symmetric(horizontal: 3),
+                              child: ChoiceChip(
+                                padding: EdgeInsets.symmetric(
+                                    vertical: 10, horizontal: 10),
+                                label: Text(
+                                  option['category'],
+                                  style: TextStyle(
+                                    color:
+                                        selectedCategory == option['category']
+                                            ? prov.enableDarkMode
+                                                ? Color(0xccffffff)
+                                                : Color(0xcc14213d)
+                                            : option['chipColor'],
+                                  ),
+                                ),
+                                selected:
+                                    selectedCategory == option['category'],
+                                selectedColor: option['chipColor'],
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(30),
+                                  side: BorderSide(
+                                    color: option['chipColor'],
+                                    width: 2,
+                                  ),
+                                ),
+                                backgroundColor: myTheme(prov.enableDarkMode),
+                                onSelected: (selected) {
+                                  setState(() {
+                                    selectedCategory =
+                                        selected ? option['category'] : null;
+                                  });
+                                },
+                              ),
+                            );
+                          }).toList()),
+                        ),
+                      ),
                       SizedBox(
                         height: 20,
                       ),
@@ -99,16 +90,16 @@ class _TodoListScreenState extends State<TodoListScreen> {
                         'Unfinished',
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            color: MyTheme(!provThemeMode)),
+                            color: myTheme(!provThemeMode)),
                       ),
-                      Divider(color: MyTheme(!provThemeMode)),
+                      Divider(color: myTheme(!provThemeMode)),
                       Column(
                           children: selectedCategory == null
                               ? TodoProvider.todoList
                                   .where((allList) => allList.isCheck == false)
                                   .map((allList) {
                                   final Map<String, dynamic> categoryOption =
-                                      categoryOptions.firstWhere((option) =>
+                                      listCategoryOptions.firstWhere((option) =>
                                           option['category'] ==
                                           allList.kategetori);
                                   return Padding(
@@ -125,7 +116,7 @@ class _TodoListScreenState extends State<TodoListScreen> {
                                       allList.isCheck == false)
                                   .map((allList) {
                                   final Map<String, dynamic> categoryOption =
-                                      categoryOptions.firstWhere((option) =>
+                                      listCategoryOptions.firstWhere((option) =>
                                           option['category'] ==
                                           allList.kategetori);
                                   return Padding(
@@ -143,16 +134,16 @@ class _TodoListScreenState extends State<TodoListScreen> {
                         'Finished',
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            color: MyTheme(!provThemeMode)),
+                            color: myTheme(!provThemeMode)),
                       ),
-                      Divider(color: MyTheme(!provThemeMode)),
+                      Divider(color: myTheme(!provThemeMode)),
                       Column(
                           children: selectedCategory == null
                               ? TodoProvider.todoList
                                   .where((allList) => allList.isCheck == true)
                                   .map((allList) {
                                   final Map<String, dynamic> categoryOption =
-                                      categoryOptions.firstWhere((option) =>
+                                      listCategoryOptions.firstWhere((option) =>
                                           option['category'] ==
                                           allList.kategetori);
                                   return Padding(
@@ -169,7 +160,7 @@ class _TodoListScreenState extends State<TodoListScreen> {
                                       allList.isCheck == true)
                                   .map((allList) {
                                   final Map<String, dynamic> categoryOption =
-                                      categoryOptions.firstWhere((option) =>
+                                      listCategoryOptions.firstWhere((option) =>
                                           option['category'] ==
                                           allList.kategetori);
                                   return Padding(
