@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
-Color MyTheme(bool valTheme) {
+Color myTheme(bool valTheme) {
   if (valTheme) {
     return Color(0xff2b2d42);
   } else {
-    return Color(0xccffffff);
+    return Color(0xFFffffff);
   }
 }
 
-Color MyThemeHead(bool valTheme) {
+Color myThemeHead(bool valTheme) {
   if (valTheme) {
     return Color(0xff2b2d42);
   } else {
@@ -16,10 +16,10 @@ Color MyThemeHead(bool valTheme) {
   }
 }
 
-Color MyThemeBottom(bool valTheme) {
+Color myThemeBottom(bool valTheme) {
   if (valTheme) {
     return Color(0xff2b2d42);
   } else {
-    return Color(0xccFFFFFF);
+    return Color(0xFFFFFFFF);
   }
 }

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_sort/provider/providersTodos.dart';
+import 'package:todo_sort/utils/data.dart';
 import 'package:todo_sort/views/MainTodo.dart';
-
 import '../GlobalFunction.dart';
 import '../provider/providerTheme.dart';
 
@@ -34,26 +34,14 @@ class _BottomNavMainState extends State<BottomNavMain> {
 
     final provCountTodo = Provider.of<TodoProvider>(context);
 
-    final totRoutine = provCountTodo.todoList
-        .where((allList) =>
-            allList.kategetori == "Routine" && allList.isCheck == false)
-        .map((allList) {})
-        .toList()
-        .length;
-
-    final totWork = provCountTodo.todoList
-        .where((allList) =>
-            allList.kategetori == "Work" && allList.isCheck == false)
-        .map((allList) {})
-        .toList()
-        .length;
-
-    final totOther = provCountTodo.todoList
-        .where((allList) =>
-            allList.kategetori == "Other" && allList.isCheck == false)
-        .map((allList) {})
-        .toList()
-        .length;
+    countCheckList(category) {
+      return provCountTodo.todoList
+          .where((allList) =>
+              allList.kategetori == category && allList.isCheck == false)
+          .map((allList) {})
+          .toList()
+          .length;
+    }
 
     Widget body = _widgetOptions.elementAt(_selectedIndex);
     switch (_selectedIndex) {
@@ -74,34 +62,34 @@ class _BottomNavMainState extends State<BottomNavMain> {
         appBar: AppBar(
           title: Text('Todos'),
           centerTitle: true,
-          backgroundColor: MyThemeHead(provThemeMode),
+          backgroundColor: myThemeHead(provThemeMode),
           actions: [
             provThemeMode ? Icon(Icons.dark_mode) : Icon(Icons.light_mode),
           ],
         ),
         body: body,
         bottomNavigationBar: BottomNavigationBar(
-          backgroundColor: MyThemeBottom(provThemeMode),
+          backgroundColor: myThemeBottom(provThemeMode),
           elevation: 10,
           items: <BottomNavigationBarItem>[
             BottomNavigationBarItem(
               icon: Icon(
                 Icons.list_alt_outlined,
-                color: MyTheme(!provThemeMode),
+                color: myTheme(!provThemeMode),
               ),
               label: 'Todos',
             ),
             BottomNavigationBarItem(
               icon: Icon(
                 Icons.calendar_month,
-                color: MyTheme(!provThemeMode),
+                color: myTheme(!provThemeMode),
               ),
               label: 'Calender',
             ),
             BottomNavigationBarItem(
               icon: Icon(
                 Icons.person,
-                color: MyTheme(!provThemeMode),
+                color: myTheme(!provThemeMode),
               ),
               label: 'Person',
             ),
@@ -114,7 +102,7 @@ class _BottomNavMainState extends State<BottomNavMain> {
               0.6), // ubah warna ikon yang tidak dipilih menjadi hitam transparan
         ),
         drawer: Drawer(
-          backgroundColor: MyTheme(provThemeMode),
+          backgroundColor: myTheme(provThemeMode),
           child: ListView(
             children: [
               Padding(
@@ -124,7 +112,7 @@ class _BottomNavMainState extends State<BottomNavMain> {
                   style: TextStyle(
                       fontSize: 50,
                       fontWeight: FontWeight.bold,
-                      color: MyTheme(!provThemeMode)),
+                      color: myTheme(!provThemeMode)),
                 ),
               ),
               Padding(
@@ -133,52 +121,36 @@ class _BottomNavMainState extends State<BottomNavMain> {
                   "By Muhammad Syahputra",
                   style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      color: MyTheme(!provThemeMode)),
+                      color: myTheme(!provThemeMode)),
                 ),
               ),
               SizedBox(
                 height: 30,
               ),
-              ListTile(
-                title: Text(
-                  'Routine',
-                  style: TextStyle(color: MyTheme(!provThemeMode)),
-                ),
-                trailing: Visibility(
-                  visible: totRoutine != 0,
-                  child: CircleAvatar(
-                    child: Text(totRoutine.toString()),
-                  ),
-                ),
-              ),
-              ListTile(
-                title: Text(
-                  'Work',
-                  style: TextStyle(color: MyTheme(!provThemeMode)),
-                ),
-                trailing: Visibility(
-                  visible: totWork != 0,
-                  child: CircleAvatar(
-                    child: Text(totWork.toString()),
-                  ),
-                ),
-              ),
-              ListTile(
-                title: Text('Other',
-                    style: TextStyle(color: MyTheme(!provThemeMode))),
-                trailing: Visibility(
-                  visible: totOther != 0,
-                  child: CircleAvatar(
-                    child: Text(totOther.toString()),
-                  ),
-                ),
+              Column(
+                children: listCategoryOptions.map((value) {
+                  return ListTile(
+                    title: Text(
+                      value['category'],
+                      style: TextStyle(color: myTheme(!provThemeMode)),
+                    ),
+                    trailing: Visibility(
+                      visible: countCheckList(value['category']) != 0,
+                      child: CircleAvatar(
+                        backgroundColor: value['chipColor'],
+                        child:
+                            Text(countCheckList(value['category']).toString()),
+                      ),
+                    ),
+                  );
+                }).toList(),
               ),
               SizedBox(
                 height: 30,
               ),
               ListTile(
                 title: Text('Dark Mode',
-                    style: TextStyle(color: MyTheme(!provThemeMode))),
+                    style: TextStyle(color: myTheme(!provThemeMode))),
                 trailing: Switch(
                   value: provThemeMode,
                   activeColor: Colors.cyan,
@@ -195,10 +167,4 @@ class _BottomNavMainState extends State<BottomNavMain> {
       ),
     );
   }
-}
-
-enum MenuItem {
-  Profil,
-  Pengaturan,
-  Logout,
 }
