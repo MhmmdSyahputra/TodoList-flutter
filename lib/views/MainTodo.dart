@@ -25,6 +25,8 @@ class _TodoListScreenState extends State<TodoListScreen> {
   @override
   Widget build(BuildContext context) {
     final prov = Provider.of<ThemeProvider>(context);
+    final provThemeMode = Provider.of<ThemeProvider>(context).enableDarkMode;
+
     return Scaffold(
       body: Consumer<TodoProvider>(builder: (
         context,
@@ -40,6 +42,7 @@ class _TodoListScreenState extends State<TodoListScreen> {
                 padding: EdgeInsets.all(10),
                 child: Center(
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Container(
                           height: 50,
@@ -89,42 +92,94 @@ class _TodoListScreenState extends State<TodoListScreen> {
                                   }).toList(),
                                 )
                               ])),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Text(
+                        'Unfinished',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: MyTheme(!provThemeMode)),
+                      ),
+                      Divider(color: MyTheme(!provThemeMode)),
                       Column(
-                          children: TodoProvider.todoList.isNotEmpty
-                              ? selectedCategory == null
-                                  ? TodoProvider.todoList.map((allList) {
-                                      final Map<String, dynamic>
-                                          categoryOption =
-                                          categoryOptions.firstWhere((option) =>
-                                              option['category'] ==
-                                              allList.kategetori);
-                                      return Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                              vertical: 5),
-                                          child: CardTodo(
-                                            data: allList,
-                                            color: categoryOption['chipColor'],
-                                          ));
-                                    }).toList()
-                                  : TodoProvider.todoList
-                                      .where((allList) =>
-                                          allList.kategetori ==
-                                          selectedCategory)
-                                      .map((allList) {
-                                      final Map<String, dynamic>
-                                          categoryOption =
-                                          categoryOptions.firstWhere((option) =>
-                                              option['category'] ==
-                                              allList.kategetori);
-                                      return Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                              vertical: 5),
-                                          child: CardTodo(
-                                            data: allList,
-                                            color: categoryOption['chipColor'],
-                                          ));
-                                    }).toList()
-                              : [Text("data masih kosong!")])
+                          children: selectedCategory == null
+                              ? TodoProvider.todoList
+                                  .where((allList) => allList.isCheck == false)
+                                  .map((allList) {
+                                  final Map<String, dynamic> categoryOption =
+                                      categoryOptions.firstWhere((option) =>
+                                          option['category'] ==
+                                          allList.kategetori);
+                                  return Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 5),
+                                      child: CardTodo(
+                                        data: allList,
+                                        color: categoryOption['chipColor'],
+                                      ));
+                                }).toList()
+                              : TodoProvider.todoList
+                                  .where((allList) =>
+                                      allList.kategetori == selectedCategory &&
+                                      allList.isCheck == false)
+                                  .map((allList) {
+                                  final Map<String, dynamic> categoryOption =
+                                      categoryOptions.firstWhere((option) =>
+                                          option['category'] ==
+                                          allList.kategetori);
+                                  return Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 5),
+                                      child: CardTodo(
+                                        data: allList,
+                                        color: categoryOption['chipColor'],
+                                      ));
+                                }).toList()),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Text(
+                        'Finished',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: MyTheme(!provThemeMode)),
+                      ),
+                      Divider(color: MyTheme(!provThemeMode)),
+                      Column(
+                          children: selectedCategory == null
+                              ? TodoProvider.todoList
+                                  .where((allList) => allList.isCheck == true)
+                                  .map((allList) {
+                                  final Map<String, dynamic> categoryOption =
+                                      categoryOptions.firstWhere((option) =>
+                                          option['category'] ==
+                                          allList.kategetori);
+                                  return Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 5),
+                                      child: CardTodo(
+                                        data: allList,
+                                        color: categoryOption['chipColor'],
+                                      ));
+                                }).toList()
+                              : TodoProvider.todoList
+                                  .where((allList) =>
+                                      allList.kategetori == selectedCategory &&
+                                      allList.isCheck == true)
+                                  .map((allList) {
+                                  final Map<String, dynamic> categoryOption =
+                                      categoryOptions.firstWhere((option) =>
+                                          option['category'] ==
+                                          allList.kategetori);
+                                  return Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 5),
+                                      child: CardTodo(
+                                        data: allList,
+                                        color: categoryOption['chipColor'],
+                                      ));
+                                }).toList())
                     ],
                   ),
                 ),

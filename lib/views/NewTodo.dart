@@ -165,6 +165,10 @@ class _NewTodosScreenState extends State<NewTodosScreen> {
                         return null;
                       },
                       onSaved: (val) => {dateStartInput = val},
+                      style: TextStyle(
+                        color: MyTheme(
+                            !provThemeMode), // Atur warna teks menjadi putih
+                      ),
                     )),
                     SizedBox(width: 70),
                     Expanded(
@@ -180,7 +184,8 @@ class _NewTodosScreenState extends State<NewTodosScreen> {
                       },
                       onSaved: (val) => {dateEndInput = val},
                       style: TextStyle(
-                        color: Colors.red, // Atur warna teks menjadi putih
+                        color: MyTheme(
+                            !provThemeMode), // Atur warna teks menjadi putih
                       ),
                     )),
                     SizedBox(width: 20),
