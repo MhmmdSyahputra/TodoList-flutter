@@ -2,19 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_sort/provider/providerTheme.dart';
 import 'package:todo_sort/utils/data.dart';
+import 'package:todo_sort/views/screenAddTodo.dart';
 import '../GlobalFunction.dart';
 import '../provider/providersTodos.dart';
 import '../widget/cardTodo.dart';
-import 'newTodo.dart';
 
-class TodoListScreen extends StatefulWidget {
-  const TodoListScreen({super.key});
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
 
   @override
-  State<TodoListScreen> createState() => _TodoListScreenState();
+  State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _TodoListScreenState extends State<TodoListScreen> {
+class _HomeScreenState extends State<HomeScreen> {
   String? selectedCategory;
   bool isCheckedTodo = false;
 
@@ -40,48 +40,44 @@ class _TodoListScreenState extends State<TodoListScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Container(
-                        child: SingleChildScrollView(
-                          scrollDirection: Axis.horizontal,
-                          child: Row(
-                              children: listCategoryOptions.map((option) {
-                            return Container(
-                              padding: EdgeInsets.symmetric(horizontal: 3),
-                              child: ChoiceChip(
-                                padding: EdgeInsets.symmetric(
-                                    vertical: 10, horizontal: 10),
-                                label: Text(
-                                  option['category'],
-                                  style: TextStyle(
-                                    color:
-                                        selectedCategory == option['category']
-                                            ? prov.enableDarkMode
-                                                ? Color(0xccffffff)
-                                                : Color(0xcc14213d)
-                                            : option['chipColor'],
-                                  ),
+                      SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Row(
+                            children: listCategoryOptions.map((option) {
+                          return Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 3),
+                            child: ChoiceChip(
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 10, horizontal: 10),
+                              label: Text(
+                                option['category'],
+                                style: TextStyle(
+                                  color: selectedCategory == option['category']
+                                      ? prov.enableDarkMode
+                                          ? Color(0xccffffff)
+                                          : Color(0xcc14213d)
+                                      : option['chipColor'],
                                 ),
-                                selected:
-                                    selectedCategory == option['category'],
-                                selectedColor: option['chipColor'],
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(30),
-                                  side: BorderSide(
-                                    color: option['chipColor'],
-                                    width: 2,
-                                  ),
-                                ),
-                                backgroundColor: myTheme(prov.enableDarkMode),
-                                onSelected: (selected) {
-                                  setState(() {
-                                    selectedCategory =
-                                        selected ? option['category'] : null;
-                                  });
-                                },
                               ),
-                            );
-                          }).toList()),
-                        ),
+                              selected: selectedCategory == option['category'],
+                              selectedColor: option['chipColor'],
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(30),
+                                side: BorderSide(
+                                  color: option['chipColor'],
+                                  width: 2,
+                                ),
+                              ),
+                              backgroundColor: myTheme(prov.enableDarkMode),
+                              onSelected: (selected) {
+                                setState(() {
+                                  selectedCategory =
+                                      selected ? option['category'] : null;
+                                });
+                              },
+                            ),
+                          );
+                        }).toList()),
                       ),
                       SizedBox(
                         height: 20,
@@ -202,14 +198,8 @@ class _TodoListScreenState extends State<TodoListScreen> {
 
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) {
-                return NewTodosScreen();
-              },
-            ),
-          );
+          Navigator.of(context).push(
+              MaterialPageRoute(builder: (context) => const NewTodosScreen()));
         },
         tooltip: 'Increment',
         child: const Icon(Icons.add),

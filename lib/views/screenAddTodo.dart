@@ -6,7 +6,7 @@ import 'package:todo_sort/provider/providerTheme.dart';
 import 'package:todo_sort/provider/providersTodos.dart';
 import 'package:date_time_picker/date_time_picker.dart';
 import 'package:todo_sort/utils/data.dart';
-import 'package:todo_sort/views/MainTodo.dart';
+import 'package:todo_sort/views/screenHome.dart';
 import 'package:uuid/uuid.dart';
 
 class NewTodosScreen extends StatefulWidget {
@@ -32,13 +32,13 @@ class _NewTodosScreenState extends State<NewTodosScreen> {
         backgroundColor: myTheme(provThemeMode),
         appBar: AppBar(
           backgroundColor: myThemeHead(provThemeMode),
-          title: Text('Todos'),
+          title: const Text('Todos'),
         ),
         body: ListView(
           children: [
             Column(
               children: [
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 Container(
                   margin: EdgeInsets.all(20),
                   child: Row(children: [
@@ -90,9 +90,9 @@ class _NewTodosScreenState extends State<NewTodosScreen> {
                     )),
                   ]),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 Container(
-                  margin: EdgeInsets.symmetric(horizontal: 20),
+                  margin: const EdgeInsets.symmetric(horizontal: 20),
                   child: Row(children: [
                     Expanded(
                         child: TextField(
@@ -110,7 +110,7 @@ class _NewTodosScreenState extends State<NewTodosScreen> {
                     ))
                   ]),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 Container(
                   margin: EdgeInsets.symmetric(horizontal: 20),
                   child: Row(children: [
@@ -146,11 +146,11 @@ class _NewTodosScreenState extends State<NewTodosScreen> {
                     ))
                   ]),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 Container(
                   margin: EdgeInsets.symmetric(horizontal: 20),
                   child: Row(children: [
-                    SizedBox(width: 20),
+                    const SizedBox(width: 20),
                     Expanded(
                         child: DateTimePicker(
                       initialValue: DateTime.now().toString(),
@@ -168,7 +168,7 @@ class _NewTodosScreenState extends State<NewTodosScreen> {
                             !provThemeMode), // Atur warna teks menjadi putih
                       ),
                     )),
-                    SizedBox(width: 70),
+                    const SizedBox(width: 70),
                     Expanded(
                         child: DateTimePicker(
                       initialValue: DateTime.now().toString(),
@@ -186,10 +186,10 @@ class _NewTodosScreenState extends State<NewTodosScreen> {
                             !provThemeMode), // Atur warna teks menjadi putih
                       ),
                     )),
-                    SizedBox(width: 20),
+                    const SizedBox(width: 20),
                   ]),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 Container(
                   margin: EdgeInsets.symmetric(horizontal: 20),
                   child: Row(children: [
@@ -232,16 +232,19 @@ class _NewTodosScreenState extends State<NewTodosScreen> {
                     )),
                   ]),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 Container(
                   margin: EdgeInsets.symmetric(horizontal: 20),
                   child: Row(children: [
                     Expanded(
                         child: OutlinedButton(
-                      onPressed: () {},
-                      child: Text('Batal'),
+                      onPressed: () {
+                        Navigator.of(context).pop(MaterialPageRoute(
+                            builder: (context) => HomeScreen()));
+                      },
+                      child: const Text('Batal'),
                     )),
-                    SizedBox(width: 20),
+                    const SizedBox(width: 20),
                     Expanded(
                         child: ElevatedButton(
                             onPressed: () {
@@ -261,7 +264,7 @@ class _NewTodosScreenState extends State<NewTodosScreen> {
                                       kategetori: categoryValue,
                                       isCheck: false));
                               Navigator.of(context).pop(MaterialPageRoute(
-                                  builder: (context) => TodoListScreen()));
+                                  builder: (context) => HomeScreen()));
 
                               showDialog(
                                 context: context,

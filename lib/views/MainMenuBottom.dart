@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_sort/provider/providersTodos.dart';
 import 'package:todo_sort/utils/data.dart';
-import 'package:todo_sort/views/MainTodo.dart';
+import 'package:todo_sort/views/screenCalender.dart';
+import 'package:todo_sort/views/screenHome.dart';
+import 'package:todo_sort/views/screenProfile.dart';
 import '../GlobalFunction.dart';
 import '../provider/providerTheme.dart';
 
@@ -46,13 +48,13 @@ class _BottomNavMainState extends State<BottomNavMain> {
     Widget body = _widgetOptions.elementAt(_selectedIndex);
     switch (_selectedIndex) {
       case 0:
-        body = TodoListScreen();
+        body = HomeScreen();
         break;
       case 1:
-        // body = ;
+        body = CalenderScreen();
         break;
       case 2:
-        // body = ;
+        body = ProfileScreen();
         break;
     }
 
@@ -64,7 +66,22 @@ class _BottomNavMainState extends State<BottomNavMain> {
           centerTitle: true,
           backgroundColor: myThemeHead(provThemeMode),
           actions: [
-            provThemeMode ? Icon(Icons.dark_mode) : Icon(Icons.light_mode),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: provThemeMode
+                  ? GestureDetector(
+                      onTap: () {
+                        prov.SetBrightness(false);
+                      },
+                      child: const Icon(Icons.dark_mode),
+                    )
+                  : GestureDetector(
+                      onTap: () {
+                        prov.SetBrightness(true);
+                      },
+                      child: const Icon(Icons.light_mode),
+                    ),
+            ),
           ],
         ),
         body: body,
@@ -116,7 +133,7 @@ class _BottomNavMainState extends State<BottomNavMain> {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.all(10),
+                padding: const EdgeInsets.all(10),
                 child: Text(
                   "By Muhammad Syahputra",
                   style: TextStyle(
@@ -124,7 +141,7 @@ class _BottomNavMainState extends State<BottomNavMain> {
                       color: myTheme(!provThemeMode)),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 30,
               ),
               Column(
@@ -145,7 +162,7 @@ class _BottomNavMainState extends State<BottomNavMain> {
                   );
                 }).toList(),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 30,
               ),
               ListTile(

@@ -95,7 +95,7 @@ class _CardTodoState extends State<CardTodo> {
                             fontSize: 16, color: myTheme(!provThemeMode)),
                       ),
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                   ],
                 ),
                 isExpanded: this.isExpanded,
