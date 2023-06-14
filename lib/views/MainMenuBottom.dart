@@ -18,9 +18,9 @@ class BottomNavMain extends StatefulWidget {
 class _BottomNavMainState extends State<BottomNavMain> {
   int _selectedIndex = 0;
   static const List<Widget> _widgetOptions = <Widget>[
-    Text('Todos'),
-    Text('Calender'),
-    Text('Profil'),
+    HomeScreen(),
+    CalenderScreen(),
+    ProfileScreen(),
   ];
 
   void _onItemTapped(int index) {
@@ -46,6 +46,14 @@ class _BottomNavMainState extends State<BottomNavMain> {
     }
 
     Widget body = _widgetOptions.elementAt(_selectedIndex);
+    String appBarTitle = 'Todos';
+    if (body is HomeScreen) {
+      appBarTitle = 'Todos';
+    } else if (body is CalenderScreen) {
+      appBarTitle = 'Calender 2023';
+    } else if (body is ProfileScreen) {
+      appBarTitle = 'Profile';
+    }
     switch (_selectedIndex) {
       case 0:
         body = HomeScreen();
@@ -62,7 +70,7 @@ class _BottomNavMainState extends State<BottomNavMain> {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
-          title: Text('Todos'),
+          title: Text(appBarTitle),
           centerTitle: true,
           backgroundColor: myThemeHead(provThemeMode),
           actions: [
