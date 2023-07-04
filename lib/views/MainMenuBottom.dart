@@ -121,10 +121,8 @@ class _BottomNavMainState extends State<BottomNavMain> {
           ],
           currentIndex: _selectedIndex,
           onTap: _onItemTapped,
-          selectedItemColor:
-              Colors.black, // ubah warna ikon yang dipilih menjadi hitam
-          unselectedItemColor: Colors.black.withOpacity(
-              0.6), // ubah warna ikon yang tidak dipilih menjadi hitam transparan
+          selectedItemColor: myTheme(!provThemeMode),
+          unselectedItemColor: myTheme(!provThemeMode),
         ),
         drawer: Drawer(
           backgroundColor: myTheme(provThemeMode),
