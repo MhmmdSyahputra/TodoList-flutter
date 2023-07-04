@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:todo_sort/model/modelTodoCal.dart';
 import 'package:todo_sort/provider/providerTheme.dart';
 import 'package:todo_sort/provider/providersTodos.dart';
 import 'package:provider/provider.dart';
+import 'package:todo_sort/provider/providersTodosCal.dart';
 import 'package:todo_sort/views/mainMenuBottom.dart';
 
 void main() {
@@ -22,6 +24,9 @@ class MyApp extends StatelessWidget {
           ),
           ChangeNotifierProvider(
             create: (context) => ThemeProvider(),
+          ),
+          ChangeNotifierProvider(
+            create: (context) => TodoCalProvider(),
           ),
         ],
         child: MaterialApp(
